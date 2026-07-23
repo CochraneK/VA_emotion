@@ -1,6 +1,117 @@
-# Face Emotion Analysis Toolkit
+<div id="readme-root">
 
-## English
+<!-- ===== BILINGUAL SWITCH STYLES ===== -->
+<style>
+  /* Hide the radio inputs */
+  .lang-switch {
+    display: none;
+  }
+
+  /* Tab button base style */
+  .lang-tab {
+    display: inline-block;
+    padding: 8px 28px;
+    margin: 0 4px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    border: 2px solid #0366d6;
+    border-radius: 24px;
+    cursor: pointer;
+    color: #0366d6;
+    background: #fff;
+    transition: all 0.2s ease;
+    user-select: none;
+    text-decoration: none;
+  }
+
+  .lang-tab:hover {
+    background: #f1f8ff;
+  }
+
+  /* Active English tab */
+  #lang-en:checked ~ .tab-row label[for="lang-en"] {
+    background: #0366d6;
+    color: #fff;
+  }
+
+  /* Active Chinese tab */
+  #lang-zh:checked ~ .tab-row label[for="lang-zh"] {
+    background: #0366d6;
+    color: #fff;
+  }
+
+  /* Hide both content areas by default */
+  #en-content, #zh-content {
+    display: none;
+    text-align: left;
+    margin-top: 24px;
+  }
+
+  /* Show English when English radio is checked */
+  #lang-en:checked ~ #en-content {
+    display: block;
+  }
+
+  /* Show Chinese when Chinese radio is checked */
+  #lang-zh:checked ~ #zh-content {
+    display: block;
+  }
+
+  /* Tab bar row */
+  .tab-row {
+    margin: 16px 0 8px 0;
+  }
+
+  /* Shared sections are always visible */
+  .shared-section {
+    text-align: left;
+    margin-top: 24px;
+  }
+
+  /* Screenshot table */
+  .screenshot-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .screenshot-table td {
+    padding: 12px 16px;
+    vertical-align: top;
+    border-bottom: 1px solid #e1e4e8;
+  }
+  .screenshot-table td:first-child {
+    width: 38%;
+    font-weight: 600;
+  }
+  .screenshot-table td:last-child {
+    width: 62%;
+  }
+  .screenshot-table img {
+    max-width: 100%;
+    border: 1px solid #d1d5da;
+    border-radius: 6px;
+  }
+  .screenshot-note {
+    font-size: 12px;
+    color: #6a737d;
+    margin-top: 4px;
+  }
+</style>
+
+<h1 align="center">Face Emotion Analysis Toolkit</h1>
+
+<!-- Hidden radio inputs for language switching -->
+<input type="radio" name="lang" id="lang-en" class="lang-switch" checked>
+<input type="radio" name="lang" id="lang-zh" class="lang-switch">
+
+<!-- Tab buttons -->
+<div class="tab-row" align="center">
+  <label for="lang-en" class="lang-tab">🌐 English</label>
+  <label for="lang-zh" class="lang-tab">🇨🇳 中文</label>
+</div>
+
+<!-- ===== ENGLISH CONTENT ===== -->
+<div id="en-content">
 
 A multi-backend toolkit for real-time webcam emotion detection, video file analysis, and emotion synchrony research. Supports three backends (MediaPipe, InsightFace, DeepFace) and produces interactive HTML reports with charts and statistics.
 
@@ -159,11 +270,10 @@ face-emotion/
 **YuNet model download fails:** The tool auto-downloads on first run. If it fails, manually download to `src/face_detection_yunet_2023mar.onnx`:
 <https://github.com/opencv/opencv_zoo/raw/main/models/face_detection_yunet/face_detection_yunet_2023mar.onnx>
 
----
+</div>
 
-## 中文
-
-### 简介
+<!-- ===== CHINESE CONTENT ===== -->
+<div id="zh-content">
 
 多后端人脸情绪分析工具集，支持**实时摄像头检测**、**视频文件分析**以及**双人情绪同步性研究**。提供四种后端引擎，自动生成交互式 HTML 报告（含饼图、时间线、柱状图、原始数据表）。
 
@@ -322,11 +432,91 @@ face-emotion/
 **YuNet 模型下载失败：** 工具会在首次运行时自动下载。如果失败，手动下载到 `src/face_detection_yunet_2023mar.onnx`：
 <https://github.com/opencv/opencv_zoo/raw/main/models/face_detection_yunet/face_detection_yunet_2023mar.onnx>
 
----
+</div>
 
-## References / 参考文献
+<!-- ===== HR ===== -->
+<hr>
+
+<!-- ===== SHARED: SCREENSHOTS / 运行截图 ===== -->
+<div class="shared-section">
+
+## 📸 Screenshots / 运行截图
+
+<table class="screenshot-table">
+  <tr>
+    <td><code>webcam_single.bat</code> 运行效果<br><small>Real-time webcam with emotion intensity bars</small></td>
+    <td>
+      <img src="screenshots/placeholder.png" alt="webcam_single screenshot" width="400">
+      <div class="screenshot-note">(待替换为实际运行截图 / Replace with actual screenshot)</div>
+    </td>
+  </tr>
+  <tr>
+    <td><code>webcam_multi.bat</code> 运行效果<br><small>Multi-face simultaneous detection</small></td>
+    <td>
+      <img src="screenshots/placeholder.png" alt="webcam_multi screenshot" width="400">
+      <div class="screenshot-note">(待替换为实际运行截图 / Replace with actual screenshot)</div>
+    </td>
+  </tr>
+  <tr>
+    <td><code>video_analyze.bat</code> 控制台交互<br><small>Drag-and-drop video path interface</small></td>
+    <td>
+      <img src="screenshots/placeholder.png" alt="video_analyze screenshot" width="400">
+      <div class="screenshot-note">(待替换为实际运行截图 / Replace with actual screenshot)</div>
+    </td>
+  </tr>
+  <tr>
+    <td><code>sync_analyze.bat</code> 控制台交互<br><small>CSV file list selection menu</small></td>
+    <td>
+      <img src="screenshots/placeholder.png" alt="sync_analyze screenshot" width="400">
+      <div class="screenshot-note">(待替换为实际运行截图 / Replace with actual screenshot)</div>
+    </td>
+  </tr>
+  <tr>
+    <td>HTML 情绪报告 - 概览页<br><small>Report overview: pie chart + summary statistics</small></td>
+    <td>
+      <img src="screenshots/placeholder.png" alt="emotion report overview" width="400">
+      <div class="screenshot-note">(待替换为实际运行截图 / Replace with actual screenshot)</div>
+    </td>
+  </tr>
+  <tr>
+    <td>HTML 情绪报告 - 时间线<br><small>Report timeline: stacked area chart</small></td>
+    <td>
+      <img src="screenshots/placeholder.png" alt="emotion report timeline" width="400">
+      <div class="screenshot-note">(待替换为实际运行截图 / Replace with actual screenshot)</div>
+    </td>
+  </tr>
+  <tr>
+    <td>HTML 情绪报告 - 柱状图<br><small>Report bar chart: per-emotion distribution</small></td>
+    <td>
+      <img src="screenshots/placeholder.png" alt="emotion report bar chart" width="400">
+      <div class="screenshot-note">(待替换为实际运行截图 / Replace with actual screenshot)</div>
+    </td>
+  </tr>
+  <tr>
+    <td>同步性分析报告<br><small>Synchrony analysis: 6 statistical metrics output</small></td>
+    <td>
+      <img src="screenshots/placeholder.png" alt="synchrony analysis report" width="400">
+      <div class="screenshot-note">(待替换为实际运行截图 / Replace with actual screenshot)</div>
+    </td>
+  </tr>
+</table>
+
+</div>
+
+<!-- ===== HR ===== -->
+<hr>
+
+<!-- ===== SHARED: REFERENCES / 参考文献 ===== -->
+<div class="shared-section">
+
+## 📚 References / 参考文献
 
 - **HSEmotion** — Savchenko, CVPR 2022. [arXiv:2108.01588](https://arxiv.org/abs/2108.01588)
 - **MediaPipe** — Google. [mediapipe.dev](https://mediapipe.dev)
 - **InsightFace** — InsightFace Team. [github.com/deepinsight/insightface](https://github.com/deepinsight/insightface)
 - **AffectNet** — Mollahosseini et al., 2017. 450k+ labeled face images.
+
+</div>
+
+</div>
+<!-- END #readme-root -->
