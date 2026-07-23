@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emotion Sync Report — Alice vs Bob</title>
+<script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  color: #e0e0e0;
+  padding: 20px;
+  min-height: 100vh;
+}
+.back-link {
+  display: inline-block;
+  color: #a0a0c0;
+  text-decoration: none;
+  font-size: 13px;
+  margin-bottom: 16px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.05);
+}
+.back-link:hover { color: #fff; background: rgba(255,255,255,0.1); }
+.container { max-width: 1100px; margin: 0 auto; }
+h1 { color: #fff; font-size: 28px; margin-bottom: 4px; }
+.meta { color: #888; font-size: 14px; margin-bottom: 20px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.card {
+  background: rgba(22, 33, 62, 0.85);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.card.full { grid-column: 1 / -1; }
+.card.emotion-grid { grid-column: 1 / -1; }
+.emotion-pairs { width: 100%; height: 850px; }
+.card h2 {
+  font-size: 16px; color: #ccc; margin-bottom: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px;
+}
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: center; padding: 6px 8px; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 13px; }
+th { color: #aaa; font-weight: 600; }
+th:first-child, td:first-child { text-align: left; }
+.chart { width: 100%; height: 350px; }
+.timeline-chart { width: 100%; height: 300px; }
+.kpi { display: flex; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
+.kpi-box {
+  flex: 1; min-width: 140px;
+  background: rgba(22, 33, 62, 0.85);
+  border-radius: 10px; padding: 14px 18px; text-align: center;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.kpi-box .val { font-size: 28px; font-weight: bold; }
+.kpi-box .lbl { font-size: 11px; color: #888; margin-top: 4px; }
+.legend-note { margin-top: 8px; font-size: 11px; color: #888; }
+.footer { margin-top: 24px; color: #555; font-size: 12px; text-align: center; padding: 20px 0; }
+.footer a { color: #4488ff; text-decoration: none; }
+@media (max-width: 700px) {
+  .grid { grid-template-columns: 1fr; }
+  .kpi { gap: 10px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="index.html" class="back-link">&larr; Back to Demo Home</a>
+<h1>Emotion Synchrony Report</h1>
+<div class="meta">
+  A: <strong>alice_session</strong> (196s) &bull;
+  B: <strong>bob_session</strong> (196s) &bull;
+  Alignment: elapsed_s &bull;
+  Overlap: 194s (970 pts) &bull;
+  Generated: 2026-07-23 12:00:00
+</div>
+
+<div class="kpi">
+  <div class="kpi-box"><div class="val" style="color:#ffaa00">0.578</div><div class="lbl">Mean Pearson r</div></div>
+  <div class="kpi-box"><div class="val" style="color:#00cc00">0.412</div><div class="lbl">Mutual Information</div></div>
+  <div class="kpi-box"><div class="val" style="color:#4488ff">0.634</div><div class="lbl">Phase Locking</div></div>
+  <div class="kpi-box"><div class="val" style="color:#cc0000">62.1%</div><div class="lbl">Dominance Agreement</div></div>
+  <div class="kpi-box"><div class="val" style="color:#6600cc">5<span style="font-size:16px">/7</span></div><div class="lbl">Granger A→B</div></div>
+  <div class="kpi-box"><div class="val" style="color:#006600">4<span style="font-size:16px">/7</span></div><div class="lbl">Granger B→A</div></div>
+</div>
+
+<div class="card" style="margin-bottom:20px">
+  <h2>Per-Emotion Metrics</h2>
+  <table>
+    <tr><th>Emotion</th><th>Pearson r</th><th>Best Lag</th><th>Lag r</th><th>MI</th><th>PLV</th><th>GC A→B</th><th>GC B→A</th></tr>
+    <tr>
+      <td style="color:#aaaaaa;font-weight:bold">neutral</td>
+      <td>0.623</td><td>-0.4s</td><td>0.641</td><td>0.389</td><td>0.582</td>
+      <td>2.81*</td><td>1.92</td>
+    </tr>
+    <tr>
+      <td style="color:#00cc00;font-weight:bold">happy</td>
+      <td>0.714</td><td>0.2s</td><td>0.726</td><td>0.521</td><td>0.723</td>
+      <td>4.15*</td><td>3.08*</td>
+    </tr>
+    <tr>
+      <td style="color:#4488ff;font-weight:bold">sad</td>
+      <td>0.481</td><td>-0.8s</td><td>0.503</td><td>0.312</td><td>0.445</td>
+      <td>1.54</td><td>2.93*</td>
+    </tr>
+    <tr>
+      <td style="color:#cc0000;font-weight:bold">angry</td>
+      <td>0.345</td><td>-0.2s</td><td>0.358</td><td>0.224</td><td>0.371</td>
+      <td>1.12</td><td>1.08</td>
+    </tr>
+    <tr>
+      <td style="color:#ffaa00;font-weight:bold">surprised</td>
+      <td>0.782</td><td>0.0s</td><td>0.782</td><td>0.598</td><td>0.815</td>
+      <td>5.32*</td><td>4.87*</td>
+    </tr>
+    <tr>
+      <td style="color:#6600cc;font-weight:bold">fearful</td>
+      <td>0.521</td><td>0.4s</td><td>0.538</td><td>0.356</td><td>0.512</td>
+      <td>2.23*</td><td>1.45</td>
+    </tr>
+    <tr>
+      <td style="color:#006600;font-weight:bold">disgusted</td>
+      <td>0.234</td><td>-1.2s</td><td>0.267</td><td>0.156</td><td>0.201</td>
+      <td>0.87</td><td>0.72</td>
+    </tr>
+  </table>
+  <p class="legend-note">* p&lt;.05 &nbsp; MI = Mutual Information (0–1) &nbsp; PLV = Phase Locking Value (0–1) &nbsp; GC = Granger Causality F-stat</p>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h2>Pearson r by Emotion</h2>
+    <div id="bar-pearson" class="chart"></div>
+  </div>
+  <div class="card">
+    <h2>Mutual Information &amp; PLV</h2>
+    <div id="bar-mi-plv" class="chart"></div>
+  </div>
+  <div class="card full">
+    <h2>Running Correlation (10s window)</h2>
+    <div id="rc" class="timeline-chart"></div>
+  </div>
+  <div class="card emotion-grid">
+    <h2>Emotion-by-Emotion Comparison (A = solid, B = dotted)</h2>
+    <div id="emotion-pairs" class="emotion-pairs"></div>
+  </div>
+  <div class="card full">
+    <h2>Emotion Intensity Overlay (happy + sad)</h2>
+    <div id="tl" class="timeline-chart"></div>
+  </div>
+</div>
+
+<div class="footer">
+  HSEmotion (EfficientNet-B0, AffectNet) &bull; Pearson r &bull; Cross-correlation &bull;
+  Mutual Information &bull; Phase Locking &bull; Granger Causality &bull; Running Correlation<br>
+  <a href="https://github.com/CochraneK/Face_emotion">github.com/CochraneK/Face_emotion</a>
+</div>
+</div>
+
+<script>
+const EMOTIONS = ["neutral", "happy", "sad", "angry", "fearful", "disgusted", "surprised"];
+const COLORS = {
+  neutral: "#aaaaaa", happy: "#00cc00", sad: "#4488ff", angry: "#cc0000",
+  surprised: "#ffaa00", fearful: "#6600cc", disgusted: "#006600"
+};
+
+// Generate two correlated but distinct emotion sessions
+function genSession(seed, correlateWith) {
+  const totalS = 196, fps = 5, n = totalS * fps;
+  const t = [];
+  const scores = {};
+  for (const e of EMOTIONS) scores[e] = [];
+
+  const base = { neutral:30, happy:20, sad:10, angry:5, fearful:5, disgusted:3, surprised:10 };
+  const amp  = { neutral:20, happy:30, sad:15, angry:12, fearful:10, disgusted:8, surprised:20 };
+
+  for (let i = 0; i < n; i++) {
+    const sec = i / fps;
+    t.push(sec);
+
+    const raw = {};
+    for (const e of EMOTIONS) {
+      let v = base[e] + amp[e] * Math.sin((0.03 + seed*0.005) * sec + seed*1.2);
+      // Shared events (both watch same video)
+      if (e === "happy" && sec > 30 && sec < 40) v += 25 + seed*5;
+      if (e === "surprised" && sec > 55 && sec < 62) v += 30 + seed*3;
+      if (e === "sad" && sec > 120 && sec < 135) v += 20 - seed*4;
+      if (e === "fearful" && sec > 80 && sec < 88) v += 20 + seed*2;
+      // Individual drift
+      v += (Math.random() - 0.5) * 14;
+      v = Math.max(0, Math.min(100, v));
+      raw[e] = v;
+    }
+
+    // If we have a correlated session, blend
+    if (correlateWith && correlateWith.scores) {
+      for (const e of EMOTIONS) {
+        raw[e] = raw[e] * 0.7 + (correlateWith.scores[e][i] || raw[e]) * 0.3;
+        raw[e] += (Math.random() - 0.5) * 8;
+      }
+    }
+
+    // Normalize
+    const total = Object.values(raw).reduce((a,b)=>a+b, 0);
+    for (const e of EMOTIONS) {
+      scores[e].push(Math.round((raw[e] / total) * 100));
+    }
+  }
+
+  // Dominance
+  const dominance = [];
+  for (let i = 0; i < n; i++) {
+    let maxE = "neutral", maxV = 0;
+    for (const e of EMOTIONS) {
+      if (scores[e][i] > maxV) { maxV = scores[e][i]; maxE = e; }
+    }
+    dominance.push(maxE);
+  }
+
+  return { t, scores, dominance };
+}
+
+const alice = genSession(0, null);
+const bob = genSession(1, alice);
+
+// --- Bar: Pearson r ---
+const pearsonR = [
+  0.623, // neutral
+  0.714, // happy
+  0.481, // sad
+  0.345, // angry
+  0.521, // fearful
+  0.234, // disgusted
+  0.782  // surprised
+];
+
+Plotly.newPlot('bar-pearson', [{
+  x: EMOTIONS, y: pearsonR, type: 'bar',
+  marker: { color: EMOTIONS.map(e => COLORS[e]) },
+  text: pearsonR.map(v => v.toFixed(3)), textposition: 'auto',
+}], {
+  paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)',
+  font: { color: '#aaa', size: 12 },
+  yaxis: { title: 'Pearson r', color: '#aaa', gridcolor: 'rgba(255,255,255,0.06)', range: [-1, 1] },
+  margin: { t: 10, b: 50, l: 50, r: 10 },
+});
+
+// --- Bar: MI & PLV ---
+const miVals  = [0.389, 0.521, 0.312, 0.224, 0.356, 0.156, 0.598];
+const plvVals = [0.582, 0.723, 0.445, 0.371, 0.512, 0.201, 0.815];
+
+Plotly.newPlot('bar-mi-plv', [
+  { x: EMOTIONS, y: miVals, type: 'bar', name: 'Mutual Information',
+    marker: { color: '#00cc00' }, opacity: 0.7 },
+  { x: EMOTIONS, y: plvVals, type: 'bar', name: 'Phase Locking',
+    marker: { color: '#4488ff' }, opacity: 0.7 }
+], {
+  paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)',
+  font: { color: '#aaa', size: 12 }, barmode: 'group',
+  yaxis: { title: 'Value', color: '#aaa', gridcolor: 'rgba(255,255,255,0.06)', range: [0, 1] },
+  margin: { t: 10, b: 50, l: 50, r: 10 },
+  legend: { orientation: 'h', y: 1.1 },
+});
+
+// --- Running Correlation ---
+function runningCorr(x, y, win) {
+  const rs = [];
+  for (let i = 0; i <= x.length - win; i++) {
+    const sx = x.slice(i, i+win), sy = y.slice(i, i+win);
+    const mx = sx.reduce((a,b)=>a+b,0)/win, my = sy.reduce((a,b)=>a+b,0)/win;
+    let num = 0, dx = 0, dy = 0;
+    for (let j = 0; j < win; j++) {
+      const a = sx[j]-mx, b = sy[j]-my;
+      num += a*b; dx += a*a; dy += b*b;
+    }
+    rs.push(num / Math.sqrt(Math.max(dx*dy, 1e-10)));
+  }
+  return rs;
+}
+
+const step = Math.max(1, Math.floor(alice.t.length / 200));
+const tDown = [];
+for (let si = 0; si < alice.t.length; si += step) tDown.push(alice.t[si]);
+
+// Running correlation for happy & sad
+const rcHappy = runningCorr(alice.scores.happy, bob.scores.happy, 50);
+const rcSad = runningCorr(alice.scores.sad, bob.scores.sad, 50);
+const rcHappyT = [];
+for (let i = 0; i < rcHappy.length; i++) rcHappyT.push(5 + i * (1/5));
+const rcSadT = [];
+for (let i = 0; i < rcSad.length; i++) rcSadT.push(5 + i * (1/5));
+
+Plotly.newPlot('rc', [
+  { x: rcHappyT, y: rcHappy, name: 'happy', type: 'scatter', mode: 'lines',
+    line: { color: '#00cc00', width: 2 } },
+  { x: rcSadT, y: rcSad, name: 'sad', type: 'scatter', mode: 'lines',
+    line: { color: '#4488ff', width: 2 } }
+], {
+  paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)',
+  font: { color: '#aaa', size: 11 },
+  xaxis: { title: 'Time (s)', color: '#aaa', gridcolor: 'rgba(255,255,255,0.06)' },
+  yaxis: { title: 'Pearson r', color: '#aaa', gridcolor: 'rgba(255,255,255,0.06)', range: [-1, 1] },
+  margin: { t: 10, b: 40, l: 50, r: 10 },
+  showlegend: true, legend: { orientation: 'h', y: 1.1 },
+  shapes: [{ type: 'line', x0: 0, x1: 1, xref: 'paper', y0: 0, y1: 0,
+             line: { color: '#555', dash: 'dash' } }],
+});
+
+// --- Emotion overlay ---
+Plotly.newPlot('tl', [
+  {
+    x: tDown,
+    y: tDown.map((_,i) => alice.scores.happy[i*step] + alice.scores.sad[i*step]),
+    name: 'A: happy+sad', type: 'scatter', mode: 'lines',
+    line: { width: 1.5 }, opacity: 0.7,
+  },
+  {
+    x: tDown,
+    y: tDown.map((_,i) => bob.scores.happy[i*step] + bob.scores.sad[i*step]),
+    name: 'B: happy+sad', type: 'scatter', mode: 'lines',
+    line: { width: 1.5 }, opacity: 0.7,
+  }
+], {
+  paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)',
+  font: { color: '#aaa', size: 11 },
+  xaxis: { title: 'Time (s)', color: '#aaa', gridcolor: 'rgba(255,255,255,0.06)' },
+  yaxis: { title: 'Score', color: '#aaa', gridcolor: 'rgba(255,255,255,0.06)' },
+  margin: { t: 10, b: 40, l: 50, r: 10 },
+  showlegend: true, legend: { orientation: 'h', y: 1.1 },
+});
+
+// --- 7-panel emotion comparison ---
+const traces_ep = [];
+for (let ei = 0; ei < EMOTIONS.length; ei++) {
+  const emo = EMOTIONS[ei];
+  const yA = tDown.map((_,i) => alice.scores[emo][Math.min(i*step, alice.scores[emo].length-1)]);
+  const yB = tDown.map((_,i) => bob.scores[emo][Math.min(i*step, bob.scores[emo].length-1)]);
+  traces_ep.push({
+    y: yA, x: tDown,
+    name: 'A: ' + emo,
+    type: 'scatter', mode: 'lines',
+    line: { color: COLORS[emo], width: 1.5, dash: 'solid' },
+    legendgroup: emo, showlegend: true,
+    xaxis: 'x' + (ei+1), yaxis: 'y' + (ei+1),
+  });
+  traces_ep.push({
+    y: yB, x: tDown,
+    name: 'B: ' + emo,
+    type: 'scatter', mode: 'lines',
+    line: { color: COLORS[emo], width: 1.5, dash: 'dot' },
+    legendgroup: emo, showlegend: false,
+    xaxis: 'x' + (ei+1), yaxis: 'y' + (ei+1),
+  });
+}
+
+const epLayout = {
+  paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)',
+  font: { color: '#aaa', size: 10 },
+  height: 850,
+  grid: { rows: 7, columns: 1, pattern: 'independent' },
+  margin: { t: 10, b: 30, l: 50, r: 30 },
+  showlegend: true,
+  legend: { orientation: 'h', y: 1.02, font: { size: 11 } },
+};
+
+// Configure each subplot
+for (let i = 0; i < EMOTIONS.length; i++) {
+  const emo = EMOTIONS[i];
+  epLayout['xaxis' + (i+1)] = {
+    title: i === 6 ? 'Time (s)' : '',
+    color: '#aaa',
+    gridcolor: 'rgba(255,255,255,0.06)',
+  };
+  epLayout['yaxis' + (i+1)] = {
+    color: COLORS[emo],
+    range: [0, 100],
+    gridcolor: 'rgba(255,255,255,0.06)',
+    title: i === 3 ? '%' : '',
+  };
+}
+
+Plotly.newPlot('emotion-pairs', traces_ep, epLayout);
+</script>
+
+</body>
+</html>

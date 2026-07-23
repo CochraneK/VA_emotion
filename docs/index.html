@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Face Emotion Analysis Toolkit — Demo</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  color: #e0e0e0;
+  min-height: 100vh;
+}
+.hero {
+  text-align: center;
+  padding: 60px 20px 40px;
+}
+.hero h1 {
+  font-size: 42px;
+  color: #fff;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+.hero .subtitle {
+  color: #a0a0c0;
+  font-size: 18px;
+  margin-bottom: 24px;
+}
+.badges {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.badges img { height: 24px; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px 40px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+.card {
+  background: rgba(22, 33, 62, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+.card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background: #1a1a3e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+.card-img img { width: 100%; height: 100%; object-fit: cover; }
+.card-body { padding: 20px; }
+.card-body h2 { font-size: 20px; color: #fff; margin-bottom: 8px; }
+.card-body p { color: #aaa; font-size: 14px; line-height: 1.6; }
+.card-body .tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-right: 6px;
+  margin-top: 10px;
+}
+.tag-live { background: rgba(0, 204, 0, 0.2); color: #00cc00; }
+.tag-report { background: rgba(68, 136, 255, 0.2); color: #4488ff; }
+.tag-sync { background: rgba(255, 170, 0, 0.2); color: #ffaa00; }
+.tag-screenshot { background: rgba(102, 0, 204, 0.2); color: #aa66ff; }
+.metrics {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 30px 0 40px;
+}
+.metric {
+  background: rgba(22, 33, 62, 0.8);
+  border-radius: 12px;
+  padding: 18px 28px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.metric .val { font-size: 32px; font-weight: 700; }
+.metric .lbl { font-size: 12px; color: #888; margin-top: 4px; }
+.features {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.features h2 { color: #fff; font-size: 24px; margin-bottom: 20px; }
+.feature-tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.feature-tag {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  color: #ccc;
+}
+.footer {
+  text-align: center;
+  color: #555;
+  font-size: 12px;
+  padding: 30px 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.footer a { color: #4488ff; text-decoration: none; }
+@media (max-width: 700px) {
+  .hero h1 { font-size: 28px; }
+  .grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Face Emotion Analysis Toolkit</h1>
+  <p class="subtitle">Real-time facial emotion recognition · Multi-backend · Interactive HTML reports · Dyadic synchrony analysis</p>
+  <div class="badges">
+    <img src="https://img.shields.io/badge/python-3.10%2B-blue?logo=python&logoColor=white" alt="Python">
+    <img src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux%20%7C%20macOS-lightgrey" alt="Platform">
+    <img src="https://img.shields.io/badge/GPU-CUDA%20%7C%20CPU-green" alt="GPU">
+    <img src="https://img.shields.io/badge/license-MIT-yellow" alt="License">
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="metrics">
+    <div class="metric">
+      <div class="val" style="color:#00cc00">4</div>
+      <div class="lbl">Backend Engines</div>
+    </div>
+    <div class="metric">
+      <div class="val" style="color:#ffaa00">7</div>
+      <div class="lbl">Basic Emotions</div>
+    </div>
+    <div class="metric">
+      <div class="val" style="color:#4488ff">6</div>
+      <div class="lbl">Sync Metrics</div>
+    </div>
+    <div class="metric">
+      <div class="val" style="color:#aa66ff">~20ms</div>
+      <div class="lbl">Per Frame (GPU)</div>
+    </div>
+  </div>
+
+  <div class="features">
+    <h2>What's Inside</h2>
+    <div class="feature-tags">
+      <span class="feature-tag">Real-time Webcam</span>
+      <span class="feature-tag">Multi-face Detection</span>
+      <span class="feature-tag">Video File Analysis</span>
+      <span class="feature-tag">Interactive HTML Reports</span>
+      <span class="feature-tag">Emotion Synchrony</span>
+      <span class="feature-tag">GPU Accelerated</span>
+      <span class="feature-tag">CSV Export</span>
+      <span class="feature-tag">Multi-backend</span>
+    </div>
+  </div>
+
+  <div class="grid">
+    <!-- Report Demo -->
+    <a href="report_demo.html" class="card">
+      <div class="card-img" style="background:linear-gradient(135deg, #0d1b2a, #1b2838)">
+        <svg width="80" height="80" viewBox="0 0 80 80">
+          <circle cx="40" cy="40" r="35" fill="none" stroke="#00cc00" stroke-width="1.5" stroke-dasharray="5,3" opacity="0.3"/>
+          <path d="M12 55 Q25 20, 40 35 Q55 15, 68 52" fill="none" stroke="#4488ff" stroke-width="2"/>
+          <circle cx="22" cy="40" r="4" fill="#ffaa00" opacity="0.6"/>
+          <circle cx="40" cy="32" r="4" fill="#00cc00" opacity="0.6"/>
+          <circle cx="58" cy="44" r="4" fill="#4488ff" opacity="0.6"/>
+        </svg>
+      </div>
+      <div class="card-body">
+        <h2>Emotion Report Demo</h2>
+        <p>Interactive session report with pie chart, stacked area timeline, per-emotion bar chart & raw data table. Generated from a real 3-minute face recording.</p>
+        <span class="tag tag-report">HTML Report</span>
+        <span class="tag tag-live">Plotly.js</span>
+      </div>
+    </a>
+
+    <!-- Sync Demo -->
+    <a href="sync_demo.html" class="card">
+      <div class="card-img" style="background:linear-gradient(135deg, #1a0d2a, #2a1538)">
+        <svg width="80" height="80" viewBox="0 0 80 80">
+          <circle cx="30" cy="35" r="12" fill="none" stroke="#ffaa00" stroke-width="1.5" opacity="0.4"/>
+          <circle cx="50" cy="35" r="12" fill="none" stroke="#00cc00" stroke-width="1.5" opacity="0.4"/>
+          <path d="M30 23 Q40 10, 50 23" fill="none" stroke="#aa66ff" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.5"/>
+          <path d="M18 35 Q30 20, 40 30 Q50 15, 62 30" fill="none" stroke="#4488ff" stroke-width="2"/>
+          <path d="M18 45 Q30 35, 40 40 Q50 35, 62 45" fill="none" stroke="#cc0000" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="card-body">
+        <h2>Emotion Sync Demo</h2>
+        <p>Dyadic synchrony analysis comparing two sessions with 6 statistical metrics: Pearson r, Mutual Information, Phase Locking, Granger Causality & more.</p>
+        <span class="tag tag-sync">Synchrony Analysis</span>
+        <span class="tag tag-report">Plotly.js</span>
+      </div>
+    </a>
+
+    <!-- Screenshot card 1 -->
+    <div class="card">
+      <div class="card-img">
+        <img src="img/webcam_single.png" alt="Single Face Detection" onerror="this.parentElement.innerHTML='<div style=color:#888;font-size:14px>📷 Screenshot: single-face webcam</div>'">
+      </div>
+      <div class="card-body">
+        <h2>Real-time Single Face</h2>
+        <p>GPU-accelerated detection (HSEmotion, EfficientNet-B0). Live emotion bars overlay, press Q to save CSV + auto-generate report.</p>
+        <span class="tag tag-live">Live Webcam</span>
+        <span class="tag tag-screenshot">GPU</span>
+      </div>
+    </div>
+
+    <!-- Screenshot card 2 -->
+    <div class="card">
+      <div class="card-img">
+        <img src="img/webcam_multi.png" alt="Multi Face Detection" onerror="this.parentElement.innerHTML='<div style=color:#888;font-size:14px">👥 Screenshot: multi-face webcam</div>'">
+      </div>
+      <div class="card-body">
+        <h2>Real-time Multi Face</h2>
+        <p>InsightFace Buffalo-S backend. Detects 2-6+ faces simultaneously with unique face_id labels and color-coded bounding boxes.</p>
+        <span class="tag tag-live">Live Webcam</span>
+        <span class="tag tag-screenshot">Multi-person</span>
+      </div>
+    </div>
+
+    <!-- GitHub card -->
+    <a href="https://github.com/CochraneK/Face_emotion" class="card">
+      <div class="card-img" style="background:linear-gradient(135deg, #0d1b2a, #1b2838);font-size:56px">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="#aaa"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      </div>
+      <div class="card-body">
+        <h2>Source Code</h2>
+        <p>View the full project on GitHub: installation, usage docs, backend comparison, troubleshooting guide, and more.</p>
+        <span class="tag tag-report">GitHub</span>
+        <span class="tag tag-live">MIT License</span>
+      </div>
+    </a>
+
+    <!-- Screenshot card 3 -->
+    <div class="card">
+      <div class="card-img">
+        <img src="img/video_analysis.png" alt="Video Analysis" onerror="this.parentElement.innerHTML='<div style=color:#888;font-size:14px">🎬 Screenshot: video analysis</div>'">
+      </div>
+      <div class="card-body">
+        <h2>Video File Analysis</h2>
+        <p>Process MP4/AVI files with configurable frame-skipping, multi-backend support, and optional emotion label overlay on output video.</p>
+        <span class="tag tag-report">Video</span>
+        <span class="tag tag-screenshot">Batch</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  Built with HSEmotion (EfficientNet-B0, AffectNet) · MediaPipe · InsightFace · DeepFace<br>
+  <a href="https://github.com/CochraneK/Face_emotion">github.com/CochraneK/Face_emotion</a>
+</div>
+
+</body>
+</html>
