@@ -1,0 +1,23 @@
+# Core dependencies (all backends)
+opencv-python>=4.8
+numpy>=1.24
+
+# Backend: HSEmotion (default, GPU-recommended)
+# Install via pip. Requires PyTorch with CUDA support for GPU acceleration.
+# If you don't have CUDA, install CPU-only PyTorch first:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+# Then install hsemotion:
+torch>=2.0
+hsemotion>=0.1
+
+# Backend: MediaPipe (CPU, fast)
+mediapipe>=0.10
+
+# Backend: InsightFace (CPU, good face detection)
+insightface>=0.7
+
+# Backend: DeepFace (optional, requires TensorFlow)
+# pip install deepface  # --extra-index-url https://download.pytorch.org/whl/cu121
+
+# Synchrony analysis tools (emotion_sync.py)
+scipy>=1.10
