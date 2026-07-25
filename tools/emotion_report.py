@@ -57,6 +57,8 @@ def load_csv(path):
     label = os.path.splitext(os.path.basename(path))[0]
     if label.startswith("emotions_"):
         label = label[9:]
+    elif label.startswith("audio_emotions_"):
+        label = label[15:]
 
     return {"t": t, "scores": scores, "dominance": dominance, "n_faces": n_faces, "label": label}
 
@@ -88,6 +90,10 @@ def build_report(path):
     if d is None:
         print(f"Empty or invalid CSV: {path}")
         return None
+
+    is_audio = os.path.basename(path).startswith("audio_emotions")
+    report_title = "Audio Emotion Session Report" if is_audio else "Emotion Session Report"
+    footer_text = "Generated with speech emotion recognition" if is_audio else "Generated with HSEmotion (EfficientNet-B0, AffectNet)"
 
     total_s = d["t"][-1]
     n_samples = len(d["t"])
@@ -185,7 +191,7 @@ th {{ color: #aaa; font-weight: 600; }}
 </head>
 <body>
 <div class="container">
-<h1>Emotion Session Report</h1>
+<h1>{report_title}</h1>
 <div class="meta">
     Label: <strong>{d["label"]}</strong> &bull;
     Generated: {report_ts} &bull;
@@ -223,7 +229,7 @@ th {{ color: #aaa; font-weight: 600; }}
 </div>
 
 <div class="footer">
-    Generated with HSEmotion (EfficientNet-B0, AffectNet) &bull; Claude Code &amp; Happy
+    {footer_text} &bull; Claude Code &amp; Happy
 </div>
 </div>
 
@@ -284,6 +290,7 @@ Plotly.newPlot('timeline', [
     const container = document.getElementById('raw');
     // Build from Python data directly
     const emotionKeys = {json.dumps(EMOTIONS)};
+    const emotionColors = {json.dumps(EMOTION_COLORS)};
     const allT = {json.dumps([round(d["t"][i],1) for i in range(0, min(n_samples, 500))])};
     const allDom = {json.dumps([d["dominance"][i] for i in range(0, min(n_samples, 500))])};
     const allScores = {json.dumps({e: [round(d["scores"][e][i],1) for i in range(0, min(n_samples, 500))] for e in EMOTIONS})};
@@ -294,7 +301,7 @@ Plotly.newPlot('timeline', [
 
     for (let i = 0; i < allT.length; i++) {{
         html += '<tr><td>' + allT[i].toFixed(1) + '</td>';
-        html += '<td style="color:' + allDom[i] + '">' + allDom[i] + '</td>';
+        html += '<td style="color:' + (emotionColors[allDom[i]] || '#e0e0e0') + '">' + allDom[i] + '</td>';
         for (const e of emotionKeys) {{
             html += '<td>' + allScores[e][i].toFixed(0) + '</td>';
         }}

@@ -1,0 +1,5 @@
+# Add these on top of requirements.txt for microphone/file speech emotion analysis.
+transformers>=4.40
+sounddevice>=0.4.6
+soundfile>=0.12
+scipy>=1.10

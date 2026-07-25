@@ -38,7 +38,7 @@ if "%LABEL%"=="" (
 
 echo.
 echo   CSV saved to output/csv/ folder.
-echo   Run sync.bat to compare sessions.
+echo   Run video_sync.bat to compare sessions.
 echo.
 pause
 :end

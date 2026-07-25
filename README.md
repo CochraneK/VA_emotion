@@ -1,4 +1,4 @@
-<div id="readme-root">
+﻿<div id="readme-root">
 
 <!-- ===== BILINGUAL SWITCH STYLES ===== -->
 <style>
@@ -98,7 +98,7 @@
   }
 </style>
 
-<h1 align="center">Face Emotion Analysis Toolkit</h1>
+<h1 align="center">VA Emotion Analysis Toolkit</h1>
 
 <!-- Hidden radio inputs for language switching -->
 <input type="radio" name="lang" id="lang-en" class="lang-switch" checked>
@@ -113,12 +113,13 @@
 <!-- ===== ENGLISH CONTENT ===== -->
 <div id="en-content">
 
-A multi-backend toolkit for real-time webcam emotion detection, video file analysis, and emotion synchrony research. Supports three backends (MediaPipe, InsightFace, DeepFace) and produces interactive HTML reports with charts and statistics.
+A multi-backend toolkit for real-time webcam/video emotion detection, audio emotion analysis, and emotion synchrony research. Supports face and speech analysis pipelines and produces interactive HTML reports with charts and statistics.
 
 ### Features
 
 - **Real-time webcam detection** — Live face detection with emotion intensity bars overlaid on the video feed
 - **Video file analysis** — Process MP4/AVI/etc. with configurable frame-skipping for speed; export to CSV
+- **Audio emotion analysis** — Analyze microphone input or audio files with a speech emotion model; export to CSV and HTML reports
 - **Interactive HTML reports** — Pie charts, stacked area timelines, per-emotion bar charts, raw data tables (offline, via embedded Plotly.js)
 - **Emotion synchrony analysis** — Compare two session CSVs with 6 statistical metrics (Pearson r, cross-correlation, mutual information, phase locking, Granger causality, running correlation)
 - **Multi-backend support** — Pick the engine that fits your hardware (CPU-only or GPU-accelerated)
@@ -232,7 +233,7 @@ python tools\emotion_sync.py output\csv\emotions_alice_20260611_120000.csv outpu
 ### Project Structure
 
 ```
-face-emotion/
+VA_emotion/
 ├── src/                          # Core source code
 │   ├── webcam.py                 # Real-time webcam detection
 │   ├── video_to_csv.py           # Video file -> CSV analysis
@@ -394,7 +395,7 @@ python tools\emotion_sync.py output\csv\emotions_alice_20260611_120000.csv outpu
 ### 项目结构
 
 ```
-face-emotion/
+VA_emotion/
 ├── src/                          # 核心源代码
 │   ├── webcam.py                 # 实时摄像头情绪检测
 │   ├── video_to_csv.py           # 视频转 CSV 分析
@@ -465,9 +466,9 @@ face-emotion/
     </td>
   </tr>
   <tr>
-    <td><code>sync_analyze.bat</code> 控制台交互<br><small>CSV file list selection menu</small></td>
+    <td><code>video_sync.bat</code> 控制台交互<br><small>CSV file list selection menu</small></td>
     <td>
-      <img src="screenshots/placeholder.png" alt="sync_analyze screenshot" width="400">
+      <img src="screenshots/placeholder.png" alt="video_sync screenshot" width="400">
       <div class="screenshot-note">(待替换为实际运行截图 / Replace with actual screenshot)</div>
     </td>
   </tr>

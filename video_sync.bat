@@ -1,11 +1,11 @@
 @echo off
 setlocal enabledelayedexpansion
-set "CP=D:/AVATAR/SOFTWARE/Anaconda/envs/face-emotion/python.exe"
-cd /d "D:/AVATAR/SOFTWARE/face-emotion"
+set "CP=python"
+cd /d "%~dp0"
 
 echo.
 echo   ============================================
-echo     Emotion Synchrony Analysis
+echo     Video Emotion Synchrony Analysis
 echo   ============================================
 echo.
 
