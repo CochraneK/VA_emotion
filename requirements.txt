@@ -21,3 +21,7 @@ insightface>=0.7
 
 # Synchrony analysis tools (emotion_sync.py)
 scipy>=1.10
+
+# Windows application-window capture (FLP Render window)
+mss>=9.0
+pywin32>=306; platform_system == "Windows"
