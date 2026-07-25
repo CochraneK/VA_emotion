@@ -2,6 +2,14 @@
 
 Video and audio emotion analysis toolkit for real-time webcam, local video, microphone, and audio-file workflows.
 
+<p align="center">
+  <a href="#english"><img src="https://img.shields.io/badge/English-VA_emotion-blue?style=for-the-badge" alt="English"></a>
+  <a href="#chinese"><img src="https://img.shields.io/badge/%E4%B8%AD%E6%96%87-VA_emotion-green?style=for-the-badge" alt="中文"></a>
+</p>
+
+<a name="english"></a>
+## English
+
 ## Features
 
 - Real-time webcam emotion detection
@@ -97,6 +105,7 @@ VA_emotion/
 
 ---
 
+<a name="chinese"></a>
 ## 中文
 
 这是一个用于视频和音频情绪分析的工具集，支持摄像头、本地视频、麦克风实时语音、音频文件分析，并可生成 HTML 报告和同步性分析结果。
