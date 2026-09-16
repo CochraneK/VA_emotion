@@ -1,8 +1,24 @@
+<div align="center">
+
 # VA Emotion Analysis Toolkit
 
-[English](README.md) | [中文](README_zh.md)
+**Video + audio affect-analysis workflows for webcam, files and session comparison**
 
-Video and audio emotion analysis toolkit for real-time webcam, local video, microphone, and audio-file workflows.
+<p>
+  <img alt="Video" src="https://img.shields.io/badge/input-video%20%2F%20webcam-6C63FF">
+  <img alt="Audio" src="https://img.shields.io/badge/input-audio%20%2F%20microphone-2F80ED">
+  <img alt="Reports" src="https://img.shields.io/badge/output-HTML%20reports-27AE60">
+  <img alt="Research" src="https://img.shields.io/badge/use-research%20prototype-F2994A">
+</p>
+
+[English](README.md) · [中文](README_zh.md)
+
+</div>
+
+A toolkit for running video- and audio-based affect analysis on live or recorded sessions, exporting per-session reports, and comparing synchrony across two CSV sessions.
+
+> [!IMPORTANT]
+> Model outputs are computational estimates, not direct measurements of a person's internal emotional state. They should not be used as clinical diagnosis, risk assessment, hiring/education decisions, or other high-stakes judgments without appropriate validation and human review.
 
 ## Features
 
